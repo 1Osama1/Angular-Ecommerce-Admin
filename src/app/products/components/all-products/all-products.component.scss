@@ -1,0 +1,219 @@
+.product-card:hover{
+    cursor: pointer;
+}
+
+img{
+    width: 2rem; /* Adjust width as needed */
+    height: 2rem; /* Adjust height as needed */
+}
+.table-cell img{
+    width: 5rem; /* Adjust width as needed */
+    height: 5rem; /* Adjust height as needed */
+}
+
+
+.viewControl{
+    cursor: pointer; 
+  transition: transform 0.3s, color 0.3s;
+}
+
+.viewControl img{
+    height: 2.5rem;
+    width:  2.5rem;
+}
+
+.viewControl:hover{
+        transform: scale(1.2); 
+}
+
+
+/* Styling for the cart container */
+.cartBox {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 0 20px;
+    margin: 50px 0;
+}
+
+.cartBox .table {
+    width: 100%;
+}
+
+.cartBox .quantity {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cartBox .quantity input {
+    margin: 0 20px;
+}
+
+.cartBox tbody {
+    border-top: 1px solid #0b3295;
+    border-bottom: 1px solid #0b3295;
+}
+
+.cartBox tbody tr td {
+    border-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.cartBox tbody img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.cartBox input {
+    text-align: center;
+}
+
+.cartBox .headCart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cartBox .headCart span {
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.cartBox .headCart span:hover {
+    background-color: #041134d4;
+    color: #FFF !important;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal button styling */
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Modal Content */
+  .modal-dialog {
+    position: relative;
+    width: auto;
+    pointer-events: none;
+    max-width: 600px;
+    margin: 1.75rem auto;
+  }
+  
+  .modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    pointer-events: auto;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    width: 100%;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Form group styling */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label{
+    margin-bottom: 0.2rem;
+  }
+  .form-group img{
+    width: 5rem;
+    height: auto;
+    margin-bottom: 0.2rem;
+  }
+  
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+  }
+  
+
+/* Ensure table layout */
+.modal-table {
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Define table rows */
+.table-header, .table-row {
+    display: table-row;
+}
+
+/* Header styling */
+.table-header {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+/* Cell styling for uniformity */
+.table-cell {
+    display: table-cell;
+    padding: 0.8rem;
+    // border: 1px solid #ddd;
+    text-align: center;
+    position: relative;
+    vertical-align: middle;
+    width: 20%; /* Adjust width as needed */
+}
+
+
+.table-cell .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Alternating row colors */
+.table-row:nth-child(even) {
+    background-color: #f9f9f9;
+}

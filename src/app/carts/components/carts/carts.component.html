@@ -1,0 +1,87 @@
+<div class="cartBox">
+
+
+    <div class="modal" [class.show]="selectedCartIndex !== null" (click)="closeModal()">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modal Title for Item {{selectedCartIndex}}</h5>
+              <button type="button" class="close" (click)="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" (click)="$event.stopPropagation()" *ngIf="selectedCartIndex !== null">
+              <p>Order Date: {{carts[selectedCartIndex].date | date: "longDate"}}</p>
+              <div class="modal-table">
+                <div class="table-header">
+                  <div class="table-cell">Name</div>
+                  <div class="table-cell">Photo</div>
+                  <div class="table-cell">Price</div>
+                  <div class="table-cell">Quantity</div>
+                  <div class="table-cell">Total</div>
+                </div>
+                <div class="table-row" *ngFor="let item of finalProducts">
+                    <div class="table-cell">{{item.title}}</div>
+                    <div class="table-cell"><img [src]="item.image" alt="Photo" width="50"></div>
+                    <div class="table-cell">{{item.price | currency}}</div>
+                    <div class="table-cell">{{item.quantity}}</div>
+                    <div class="table-cell">{{item.price * item.quantity | currency}}</div>
+                </div>
+                <div class="table-row">
+                  <div class="table-cell"></div>
+                  <div class="table-cell"></div>
+                  <div class="table-cell"></div>
+                  <div class="table-cell">Total:</div>
+                  <div class="table-cell">{{total | currency}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+    <h1 class="text-danger mb-3">Users Shopping Carts</h1>
+    <form [formGroup]="form">
+        <div class="row d-flex justify-content-around">
+            <div class="col-md-3">
+                <label for="startDate" class="mx-1 p-1">Start Date</label>
+                <input type="date" id="startDate" formControlName="start" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label for="endDate" class="mx-1 p-1">End Date</label>
+                <input type="date" id="endDate" formControlName="end" class="form-control">
+            </div>
+            <div class="col-md-3 d-flex" style="align-self: flex-end;">
+                <button class="btn btn-success" (click)="applyFilter()">Apply</button>
+            </div>
+        </div>
+    </form>
+    <table class="table table-striped mt-2" >
+        <thead>
+            <tr>
+                <th></th>
+                <th class="text-center">Date</th>
+                <th class="text-center">Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr *ngFor="let cart of carts; let index = index" >       
+                <td></td>    
+                <td>{{cart.date | date:"longDate"}}</td>
+                <td>
+                    <input class="form-control" type="number" disabled="true" style="background-color: rgb(255, 255, 255);" [(ngModel)]="cart.products.length">
+                </td>
+                
+                <td>
+                    <button class="btn btn-primary mx-2" (click)="openModal(index) ; viewCart(index)">View</button>
+                    <button class="btn btn-danger" (click)="deleteCart(cart.id)">Delete</button>
+                </td> 
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <div *ngIf="carts.length == 0" class="alert alert-warning text-center" role="alert">
+    <strong>The Carts are Empty</strong>
+    </div>

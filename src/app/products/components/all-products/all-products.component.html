@@ -1,0 +1,146 @@
+
+<div class="mt-5">
+<button class="btn btn-primary" (click)="openModal()">Add New Product</button>
+</div>
+<!-- Add New Product Modal -->
+<div id="addProductModal" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between mt-3">
+          <h2>Add New Product</h2>
+        <span class="close mx-2" (click)="closeModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" formControlName="title" class="form-control" required>
+          </div>
+
+          <div class="form-group d-flex flex-column">
+            <label for="image">Image</label>
+            <img src="{{base64}}" alt="">
+            <input type="file" id="image" (change)="onFileChange($event)" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" formControlName="price" min="0" class="form-control" required placeholder="Price">
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" formControlName="category" class="form-control" required>
+                <option value="" disabled hidden selected>All</option>
+                <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" formControlName="description" class="form-control" rows="5" required></textarea>
+          </div>
+
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Add Product</button>
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Update Modal -->
+<div id="updateProductModal" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between mt-3">
+          <h2>Update Product</h2>
+        <span class="close mx-2" (click)="closeUpdateModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="onUpdateSubmit()">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" formControlName="title" class="form-control" required>
+          </div>
+
+          <div class="form-group d-flex flex-column">
+            <label for="image">Image</label>
+            <img src="{{base64}}" alt="">
+            <input type="file" id="image" (change)="onFileChange($event)" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" formControlName="price" min="0" class="form-control" required placeholder="Price">
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" formControlName="category" class="form-control" required>
+                <option value="" disabled hidden selected>All</option>
+                <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" formControlName="description" class="form-control" rows="5" required></textarea>
+          </div>
+
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Update Product</button>
+            <button type="button" class="btn btn-secondary" (click)="closeUpdateModal()">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="d-flex justify-content-between align-items-center">
+    <div class="my-2 w-25">
+        <app-select [items]="categories" [title]="'Categories'" (selectedValue)="filterCategory($event)"></app-select>
+    </div>
+    <div *ngIf="!gridView" class="d-flex align-items-center viewControl mx-4">
+        <img (click)="toggleGridView()" src="https://api.iconify.design/mdi:dots-grid.svg" class="" alt="icon">
+    </div>
+    <div *ngIf="gridView" class="d-flex align-items-center viewControl mx-4">
+        <img (click)="toggleGridView()" src="https://api.iconify.design/ic:twotone-format-list-bulleted.svg" class="" alt="icon">
+    </div>
+</div>
+<div class="text-center w-100" *ngIf="loading">
+    <app-spinner></app-spinner>
+</div>
+<div *ngIf="gridView && !loading" class="row p-3">
+    <div class="col-md-3 col-sm-1 product-card" *ngFor="let product of products">
+        <app-product [data]="product" (item)="addToCart($event)"></app-product>
+    </div>
+</div>
+    <div *ngIf="!gridView && !loading">
+
+
+
+    <div class="modal-table">
+        <div class="table-header">
+            <div class="table-cell"></div>
+            <div class="table-cell">Name</div>
+            <div class="table-cell">Category</div>
+            <div class="table-cell">Price</div>
+            <div class="table-cell"></div>
+        </div>
+        <div class="table-row" *ngFor="let product of products; let i = index">
+            <div class="table-cell"><img class="rounded" [src]="product.images[0]" alt="Photo" width="50"></div>
+            <div class="table-cell">{{product.title}}</div>
+            <div class="table-cell">{{product.category.name }}</div>
+            <div class="table-cell">{{product.price | currency }}</div>
+            <div class="table-cell">
+                <button class="btn btn-warning" (click)="updateProduct(product)">Update</button>
+            </div>            
+        </div>
+        </div>
+    </div>
+
